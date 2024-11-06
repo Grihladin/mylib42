@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int	ft_printf_format_definer(const char *format, int i, va_list args)
+static int ft_printf_format_definer(const char *format, int i, va_list args)
 {
 	if (format[i] == 'c')
 		return (ft_printf_char((char)va_arg(args, int)));
@@ -29,18 +29,18 @@ static int	ft_printf_format_definer(const char *format, int i, va_list args)
 	return (0);
 }
 
-static int	line_saver(int *i, int current_len)
+static int line_saver(int *i, int current_len)
 {
 	(*i)++;
 	return (current_len);
 }
 
-int	ft_printf(const char *format, ...)
+int ft_printf(const char *format, ...)
 {
-	va_list	args;
-	int		i;
-	int		printed_len;
-	int		current_len;
+	va_list args;
+	int i;
+	int printed_len;
+	int current_len;
 
 	i = 0;
 	printed_len = 0;
@@ -58,7 +58,7 @@ int	ft_printf(const char *format, ...)
 		else
 			current_len = ft_printf_char(format[i]);
 		if (current_len == -1)
-			return (-1);
+			return (va_end(args), -1);
 		printed_len += line_saver(&i, current_len);
 	}
 	return (va_end(args), printed_len);
